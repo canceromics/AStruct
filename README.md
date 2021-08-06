@@ -37,7 +37,7 @@ The tool is generated as circm6a.jar in this directory.
 * Start from bam file of and input sample for example.
 
 ```
-java -Xmx16g -jar circm6a.jar -tf Treat.bam -cf Control.bam -o ./example -g genome.fa
+java -Xmx16g -jar diffRSS.jar -tf Treat.bam -cf Control.bam -o ./example -g genome.fa
 ```
 Running this instruction will result in getting a file named example_circRNAs.txt. `./example` means output_dir/file_prefix
 

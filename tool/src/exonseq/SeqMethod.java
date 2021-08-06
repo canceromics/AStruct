@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import bed.*;
 import genome.*;
@@ -18,15 +19,21 @@ import sim.SimMethod;
 public class SeqMethod {
 	private Genome genome = null;
 	private static SeqMethod m = new SeqMethod();
-	private HashMap<String, IntervalTree<Bed12>> bed_table = null;
-	private HashMap<Bed12, HashMap<Transcript, Integer>> script_ponits = null;
+	private Map<String, IntervalTree<Bed12>> bed_table = null;
+	private Map<String, IntervalTree<Mutation>> mut_table = null;
+	private Map<Bed12, HashMap<Transcript, Integer>> script_ponits = null;
 	
 	public static void run() {
 		try {
 			m.genome = Method.loadGenomeInfo(InParam.getParams().getExonFile(), InParam.getParams().getGenomeFile());
 			Method.printNow("Genome complete!");
-			m.bed_table = Method.getInstance().readBedFile(InParam.getParams().getPeakFile(), true, null);
+			m.bed_table = InParam.getParams().getPeakFile() == null ? null : Method.getInstance().readBedFile(InParam.getParams().getPeakFile(), true, null);
 			Method.printNow("Load complete!");
+			if (InParam.getParams().getMutFile() != null) {
+				m.mut_table = Method.readMutation(InParam.getParams().getMutFile(), null);
+				m.getSeq();
+				return;
+			}
 			m.script_ponits = Method.getInstance().seqBamScript(m.genome, InParam.getParams().getInputSams(), m.bed_table);
 			
 			m.annote();
@@ -34,7 +41,31 @@ public class SeqMethod {
 			e.printStackTrace();
 		}
 	}
-	
+
+	private void getSeq() throws IOException {
+		List<String> outList = new ArrayList<>();
+		mut_table.forEach((chr, bedTree) -> {
+			if (genome.getChr(chr) == null || genome.getChr(chr).getSeq() == null) {
+				return;
+			}
+			for (Iterator<Node<Mutation>> bedNodes = bedTree.overlappers(0, Integer.MAX_VALUE); bedNodes.hasNext();) {
+				Node<Mutation> bedNode = bedNodes.next();
+				int start = Math.max(0, bedNode.getStart() - InParam.getParams().getAlignmentLength() - 1);
+				int end = Math.min(genome.getChr(chr).getSeq().length(), bedNode.getEnd() + InParam.getParams().getAlignmentLength());
+				StringBuilder sb = new StringBuilder();
+				sb.append(chr);
+				sb.append('\t');
+				sb.append(start);
+				sb.append('\t');
+				sb.append(end);
+				sb.append('\t');
+				sb.append(genome.getChr(chr).getSeq().substring(start, end).toUpperCase());
+				outList.add(sb.toString());
+			}
+		});
+		Method.writeFile(InParam.getParams().getOutPrefix() + "_seq.bed", outList, null);
+	}
+
 	private void annote() throws IOException {
 		final List<Bed12> annoted_bed = new ArrayList<>();
 		m.bed_table.forEach((chr_string, bed_tree) -> {

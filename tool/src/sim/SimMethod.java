@@ -13,7 +13,6 @@ import java.lang.reflect.Modifier;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -22,10 +21,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.logging.Logger;
 import java.util.zip.GZIPOutputStream;
-
-import javax.xml.stream.events.StartDocument;
 
 import org.apache.commons.math3.distribution.*;
 
@@ -38,7 +34,6 @@ import main.BamMethod;
 import main.CommonMethod;
 import main.InParam;
 import main.Method;
-import mapping.Read;
 import sim.Scaffolds.Scaffold;
 
 public class SimMethod {
@@ -323,7 +318,8 @@ public class SimMethod {
  		scafTable.forEach((chr, scafTree) -> {
 			out.put(chr, new IntervalTree<>());
 			for (Node<Scaffolds> scafNode : scafTree) {
-				out.get(chr).put(scafNode.getStart(), scafNode.getEnd(), scafNode.getValue().getRandScafPair());
+//				out.get(chr).put(scafNode.getStart(), scafNode.getEnd(), scafNode.getValue().getRandScafPair());
+				out.get(chr).put(scafNode.getStart(), scafNode.getEnd(), scafNode.getValue().getDiffScafPair());
 			}
 		});
  		return out;
@@ -1194,10 +1190,10 @@ public class SimMethod {
 			flags[3] = false;
 			flags[4] = false;
 			flags[6] = false;
-			if (!scaf_table.isEmpty() && !args.isRtMut() && ip && !args.isNegative()) {
+			if (!scaf_table.isEmpty() && !args.isRtMut() && ip) {
 				flags[4] = CommonMethod.randInt(2) == 1;
 				flags[6] = true;
-				int[] region = getRTstopRegion(script, start, end, seqs, !flags[4]);
+				int[] region = getRTstopRegion(script, start, end, seqs, !flags[4] && !args.isNegative());
 				start = region[0];
 				end = region[1];
 			}
@@ -1631,13 +1627,11 @@ public class SimMethod {
 				sb.append('\t');
 				sb.append(scafNode.getValue()[1].getSitePair());
 				sb.append('\t');
-				String[] matchStats = Read.getMatchScore(scafNode.getValue()[0].getSitePair().replaceAll("\\)", "("), scafNode.getValue()[1].getSitePair().replaceAll("\\)", "("),
-						2, new int[] {1, 0, -999, -999}).split("\\|");
-				sb.append(scafNode.getEnd() - scafNode.getStart() + 1 - Integer.parseInt(matchStats[1]));
+				sb.append(CommonMethod.getHammingDistance(scafNode.getValue()[0].getSitePair(), scafNode.getValue()[1].getSitePair()));
 				structList.add(sb.toString());
 			}
 		});
-		Method.writeFile(m.args.getOutPrefix() + "_struct.bed", structList, null);
+		Method.writeFile(m.args.getOutPrefix() + "_allele_struct.bed", structList, null);
 	}
 	
 	public static void ensureMutDes(Map<String, IntervalTree<Peak>> peak_table) {

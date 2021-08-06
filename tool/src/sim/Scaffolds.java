@@ -105,6 +105,26 @@ public class Scaffolds extends IntRegion{
 				scafs.hasNext();) {
 			Scaffold scaf = scafs.next();
 			scafPair[++i] = scaf;
+		}		
+		if (scafPair[1] == null) {
+			scafPair[1] = scafPair[0];
+		}
+		return scafPair;
+	}
+	
+	public Scaffold[] getDiffScafPair() {
+		Scaffold[] scafPair = new Scaffold[2];
+		int diff = -1;
+		List<String> scafs = new ArrayList<>(scarMap.keySet());
+		for (int i = 0; i < scafs.size(); ++i) {
+			for (int j = i; j < scafs.size(); ++j) {
+				int dist = CommonMethod.getHammingDistance(scafs.get(i), scafs.get(j));
+				if (diff < dist) {
+					scafPair[0] = scarMap.get(scafs.get(i));
+					scafPair[1] = scarMap.get(scafs.get(j));
+					diff = dist;
+				}
+			}
 		}
 		return scafPair;
 	}

@@ -1377,7 +1377,7 @@ public class Method {
 		return out;
 	}
 	
-	public <T extends IntRegion> HashMap<T, HashMap<Transcript, Integer>> seqBamScript(Genome genome, List<String> file_names, HashMap<String, IntervalTree<T>> table) throws IOException {
+	public <T extends IntRegion> HashMap<T, HashMap<Transcript, Integer>> seqBamScript(Genome genome, List<String> file_names, Map<String, IntervalTree<T>> table) throws IOException {
 		if (file_names == null) {
 			return null;
 		}

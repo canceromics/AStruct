@@ -140,6 +140,25 @@ public class CommonMethod {
 		return -1;
 	}
 	
+	public static int getHammingDistance(String s1, String s2) {
+		if (s1 == null) {
+			return s2 == null ? 0 : s2.length();
+		}
+		if (s2 == null) {
+			return s1.length();
+		}
+		if (s2.length() < s1.length()) {
+			String s = s1;
+			s1 = s2;
+			s2 = s;
+		}
+		int dist = s2.length() - s1.length();
+		for (int i = 0; i < s1.length(); ++i) {
+			dist += s1.charAt(i) == s2.charAt(i) ? 0 : 1;
+		}
+		return dist;
+	}
+	
 	public static double calORvalue(int in_a1, int in_a2, int ip_a1, int ip_a2) {
 		return (double) (ip_a1 * in_a2) / (double) (ip_a2 * in_a1);
 	}
