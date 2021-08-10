@@ -1360,7 +1360,7 @@ public class SimMethod {
 		sb.append(flags[2] ? 'P' : 'U');
 		sb.append(flags[3] ? 'A' : 'R');
 		sb.append(flags[4] ? 'A' : 'R');
-		sb.append(flags[5] ? ":IP" : ":in");
+		sb.append(flags[5] ? ":T" : ":C");
 		return sb.toString();
 	}
 

@@ -1,0 +1,2 @@
+C/T : NC_000022.11 in HepG2
+HC/HT : NC_000022.11 in H9

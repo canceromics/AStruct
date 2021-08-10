@@ -330,10 +330,10 @@ public class Mutation {
 	}
 	
 	public static String getHeader() {
-		return InParam.getParams().getControlFile() == null ?
-				"#Chr\tStart\tEnd\tRef\tAlt\tID\tTag\tAllSNP\tA\tT\tG\tC"
-				: "#Chr\tStart\tEnd\tRef\tAlt\tID\tTag\tAllSNP\tAin\tTin\tGin\tCin\tA\tT\tG\tC";
-//		return "#Chr\tStart\tEnd\tRef\tAlt\tRefMAF\tMAF\tRealMAF\tRefStat\tStat\tAltCount\tRefCount\tIPAltCount\tIPRefCount";
+//		return InParam.getParams().getControlFile() == null ?
+//				"#Chr\tStart\tEnd\tRef\tAlt\tID\tTag\tAllSNP\tA\tT\tG\tC"
+//				: "#Chr\tStart\tEnd\tRef\tAlt\tID\tTag\tAllSNP\tAin\tTin\tGin\tCin\tA\tT\tG\tC";
+		return "#Chr\tStart\tEnd\tRef\tAlt\tDes\tAlt_C\tRef_C\tAlt_T\tRef_T\tTranscript\tMaf\tpValue\tTag";
 	}
 	
 	private String getTag(double maf, int ip_a1, int ip_a2) {
@@ -608,24 +608,22 @@ public class Mutation {
 		sb.append(ref);
 		sb.append('\t');
 		sb.append(getSNPString());
-		if (description != null) {
-			sb.append('\t');
-			sb.append(description);
-		}
+		sb.append('\t');
+		sb.append(description == null ? "-" : description);
 		int ip_mut_count = getMutCount(true), ip_ref_count = getIpCount(ref),
 				mut_count = getMutCount(false), ref_count = getInputCount(ref);
-		double maf = script == null ? 0.5 : script.getGene().getSimMaf();
-		sb.append('\t');
-		sb.append(String.format("%.3f", maf));
-		sb.append('\t');
-		sb.append(String.format("%.3f", ref_maf));
-		sb.append('\t');
-		double ip_maf = (double) ip_mut_count / (double) (ip_ref_count + ip_mut_count);
-		sb.append(String.format("%.3f", ip_maf));
-		sb.append('\t');
-		sb.append(getTag(maf, ip_mut_count, ip_ref_count));
-		sb.append('\t');
-		sb.append(getTag(ref_maf, ip_mut_count, ip_ref_count));
+//		double maf = script == null ? 0.5 : script.getGene().getSimMaf();
+//		sb.append('\t');
+//		sb.append(String.format("%.3f", maf));
+//		sb.append('\t');
+//		sb.append(String.format("%.3f", ref_maf));
+//		sb.append('\t');
+//		double ip_maf = (double) ip_mut_count / (double) (ip_ref_count + ip_mut_count);
+//		sb.append(String.format("%.3f", ip_maf));
+//		sb.append('\t');
+//		sb.append(getTag(maf, ip_mut_count, ip_ref_count));
+//		sb.append('\t');
+//		sb.append(getTag(ref_maf, ip_mut_count, ip_ref_count));
 		sb.append('\t');
 		sb.append(mut_count);
 		sb.append('\t');
@@ -636,46 +634,46 @@ public class Mutation {
 		sb.append(ip_ref_count);	
 		sb.append('\t');
 		sb.append(script);
+		double maf = script == null ? 0.5 : script.getGene().getMAF();
 		sb.append('\t');
-		maf = script == null ? 0.5 : script.getGene().getMAF();
 		sb.append(String.format("%.3f", maf));
-		sb.append('\t');
-		sb.append(String.format("%.4f", CommonMethod.calPvalue(isMutMajor() ? maf : 1.0 - maf, 
-				ip_mut_count, ip_ref_count)));
-		sb.append('\t');
-		sb.append(getTag(isMutMajor() ? maf : 1.0 - maf, 
-				ip_mut_count, ip_ref_count));
+//		sb.append('\t');
+//		sb.append(String.format("%.4f", CommonMethod.calPvalue(isMutMajor() ? maf : 1.0 - maf, 
+//				ip_mut_count, ip_ref_count)));
+//		sb.append('\t');
+//		sb.append(getTag(isMutMajor() ? maf : 1.0 - maf, 
+//				ip_mut_count, ip_ref_count));
 		sb.append('\t');
 		sb.append(String.format("%.4f", CommonMethod.calPvalue(mut_count, ref_count,
 				ip_mut_count, ip_ref_count)));
 		sb.append('\t');
 		sb.append(getTag(isMutMajor() ? maf : 1.0 - maf, mut_count, ref_count,
 				ip_mut_count, ip_ref_count));
-		sb.append('\t');
-		sb.append(String.format("%.4f", CommonMethod.calPvalue((double) ip_mut_count / (double) (ip_mut_count + ip_ref_count),
-				(int) Math.round(getTotalCount(false) * (isMutMajor() ? maf : 1.0 - maf)), 
-				(int) Math.round(getTotalCount(false) * (isMutMajor() ? 1.0 - maf : maf)))));
-		sb.append('\t');
-		sb.append(getTag((double) ip_mut_count / (double) (ip_mut_count + ip_ref_count), 
-				(int) Math.round(getTotalCount(false) * (isMutMajor() ? maf : 1.0 - maf)), 
-				(int) Math.round(getTotalCount(false) * (isMutMajor() ? 1.0 - maf : maf))));
-		maf = (double) mut_count / (double) (mut_count + ref_count);
-		sb.append('\t');
-		sb.append(String.format("%.3f", maf));
-		sb.append('\t');
-		sb.append(String.format("%.4f", CommonMethod.calPvalue(maf, 
-				ip_mut_count, ip_ref_count)));
-		sb.append('\t');
-		sb.append(getTag(maf, 
-				ip_mut_count, ip_ref_count));
-		sb.append('\t');
-		sb.append(String.format("%.4f", CommonMethod.calPvalue((double) ip_mut_count / (double) (ip_mut_count + ip_ref_count),
-				(int) Math.round(getTotalCount(false) * maf ), 
-				(int) Math.round(getTotalCount(false) * (1.0 - maf)))));
-		sb.append('\t');
-		sb.append(getTag((double) ip_mut_count / (double) (ip_mut_count + ip_ref_count), 
-				(int) Math.round(getTotalCount(false) * maf), 
-				(int) Math.round(getTotalCount(false) * (1.0 - maf))));
+//		sb.append('\t');
+//		sb.append(String.format("%.4f", CommonMethod.calPvalue((double) ip_mut_count / (double) (ip_mut_count + ip_ref_count),
+//				(int) Math.round(getTotalCount(false) * (isMutMajor() ? maf : 1.0 - maf)), 
+//				(int) Math.round(getTotalCount(false) * (isMutMajor() ? 1.0 - maf : maf)))));
+//		sb.append('\t');
+//		sb.append(getTag((double) ip_mut_count / (double) (ip_mut_count + ip_ref_count), 
+//				(int) Math.round(getTotalCount(false) * (isMutMajor() ? maf : 1.0 - maf)), 
+//				(int) Math.round(getTotalCount(false) * (isMutMajor() ? 1.0 - maf : maf))));
+//		maf = (double) mut_count / (double) (mut_count + ref_count);
+//		sb.append('\t');
+//		sb.append(String.format("%.3f", maf));
+//		sb.append('\t');
+//		sb.append(String.format("%.4f", CommonMethod.calPvalue(maf, 
+//				ip_mut_count, ip_ref_count)));
+//		sb.append('\t');
+//		sb.append(getTag(maf, 
+//				ip_mut_count, ip_ref_count));
+//		sb.append('\t');
+//		sb.append(String.format("%.4f", CommonMethod.calPvalue((double) ip_mut_count / (double) (ip_mut_count + ip_ref_count),
+//				(int) Math.round(getTotalCount(false) * maf ), 
+//				(int) Math.round(getTotalCount(false) * (1.0 - maf)))));
+//		sb.append('\t');
+//		sb.append(getTag((double) ip_mut_count / (double) (ip_mut_count + ip_ref_count), 
+//				(int) Math.round(getTotalCount(false) * maf), 
+//				(int) Math.round(getTotalCount(false) * (1.0 - maf))));
 		return sb.toString();
 	}
 }

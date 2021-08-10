@@ -2,7 +2,7 @@ rtmut:
 	*_riboSNitch.txt;
 	header{
 		Chr : reference chromosome name
-		Position : snp position in the chromosome 
+		Position : snp position in the chromosome (1 based)
 		Ref : reference snp
 		Alt : variant snp
 		Name : dbSNP ID
@@ -33,20 +33,124 @@ sim:
 	*_C_L2.fastq.gz;
 	[*_mut.bed;]
 	header{
-		
+		Chr : reference chromosome
+		Start : region start position (0 based)
+		End : region end position (0 based)
+		Ref : reference snp
+		Alt : variant snp
+		Des : dbSNP ID or others
+		Alt_C : variant allele reads count in control file
+		Ref_C : reference allele reads count in control file
+		Alt_T : variant allele reads count in treat file
+		Ref_T : reference allele reads count in treat file
+		Transcript : the longest transcript covers this snp
+		Maf : major allele frequency
+		pValue : p-Value of fisher exact test
+		Tag : tag of major allele frequency between treat file and control file
 	}
 	[*_peak.bed;]
+	header{
+		Chr : reference chromosome
+		Start : region start position (0 based)
+		End : region end position (0 based)
+		Circ : whether peak is near a clip point of circRNA]
+		Des : description of the m6A peak
+		Script : id(s) of transcripts overlap the region
+	}
 	[*_circ.bed;]
+	header{
+		Chr : reference chromosome
+		Start : region start position (0 based)
+		End : region end position (0 based)
+		Transcript : id of transcript that circle clipped
+		Dis_m6A : distance to nearest peak center
+		BSJ_T : circle clipped reads in treat file
+		BSJ_C : circle clipped reads in control file
+		linear_T : non circle clipped reads in treat file
+		linear_C : non circle clipped reads in control file
+	}
+	[*_allele_struct.bed;]
+	header{
+		Chr : reference chromosome
+		Start : region start position (0 based)
+		End : region end position (0 based)
+		1_struct : structure sequence of allele 1
+		2_struct : structure sequence of allele 2
+		Distance : distance of structures with . against ) or (
+	}
 	[*_annote.txt;]
+	header{
+		Chr : reference chromosome
+		Script : id of the transcript which used to build sequence
+		Exon_region... : positions of the sequence are built
+		Flags : {
+			C/L : whether transcript designed to be circle clipped
+			C/L : whether sequence covered circle clip point
+			P/U : whether sequence overlapped m6A peak region
+			A/R : whether transcript designed to be allele 1/2
+			A/R : whether sequence covered SNP point
+			T/C : the sequence come from treat/control file
+		}
+	}
 maf:
 	*_mut.txt;
+	header{
+		Chr : reference chromosome
+		Start : region start position (0 based)
+		End : region end position (0 based)
+		Ref : reference snp
+		Alt : variant snp
+		Des : dbSNP ID or others
+		Alt_C : variant allele reads count in control file
+		Ref_C : reference allele reads count in control file
+		Alt_T : variant allele reads count in treat file
+		Ref_T : reference allele reads count in treat file
+		Transcript : the longest transcript covers this snp
+		Maf : major allele frequency
+		pValue : p-Value of fisher exact test
+		Tag : tag of major allele frequency between treat file and control file
+	}
 seq:
 	*_annoted.bed;
+	header{
+		standard Bed12
+	}
 stat:
 	*_sup.txt;
+	header{
+		Name of treat files : each column shows the result of the file 
+	}
+	
 cover:
 	*_gene_score.bed;
+	header{
+		Chr : reference chromosome
+		Start : gene start position (0 based)
+		End : gene end position (0 based)
+		GeneID : id of the gene
+		Strand : strand of the gene
+		Enrichment : enrichment from control file to treat file
+		Count_T : reads overlap gene region in treat file
+		Count_C : reads overlap gene region in control file
+	}
 	[*_snp.bed;]
+	header{
+		Chr : reference chromosome
+		Start : region start position (0 based)
+		End : region end position (0 based)
+		Ref : reference snp
+		Alt : variant snp
+		Des : dbSNP ID or others
+		Alt_C : variant allele reads count in control file
+		Ref_C : reference allele reads count in control file
+		Alt_T : variant allele reads count in treat file
+		Ref_T : reference allele reads count in treat file
+		Transcript : the longest transcript covers this snp
+		Maf : major allele frequency
+		pValue : p-Value of fisher exact test
+		Tag : tag of major allele frequency between treat file and control file
+	}
+	
 split:
 	*_ref.[bam/sam];
 	*_alt.[bam/sam];

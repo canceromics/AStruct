@@ -302,6 +302,8 @@ public class Method {
 	
 	private void writeGenes(Genome genome, String out_file) throws IOException {
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File(out_file)))){
+			bw.write("#Chr\tStart\tEnd\tGeneID\tStrand\tEnrichment\tCount_T\tCount_C");
+			bw.newLine();
 			for (Entry<String, Chromosome> entry : genome.getChrMap().entrySet()) {
 				for (Node<Gene> node : entry.getValue().getGeneTree()) {
 					if (node.getValue().getInputReadCount() + node.getValue().getIpReadCount() > 0) {

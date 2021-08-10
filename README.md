@@ -13,7 +13,6 @@ diffRSS is a powerful tool for detection  different riboSNitch structure in alle
 * [Usage](#Usage)
 * [Example](#Example)
 * [Output Headers](#OutputHeaders)
-* [Limitations](#Limitations)
 * [License](#License)
 
 ## Requirements
@@ -37,14 +36,15 @@ The tool is generated as diffRSS.jar in this directory.
 * Start from bam file of and input sample for example.
 
 ```
-java -Xmx16g -jar diffRSS.jar -tf example/treat1.bam example/treat2.bam -cf example/control1.bam example/control2.bam -o example/result -gf example/reference/GRCh38.p12_NC_000022.11.fa -ef example/reference/GRCh38.p12_NC_000022.11.gff -repli
+java -Xmx16g -jar diffRSS.jar -tf example/data/T1.bam example/data/T2.bam -cf example/data/C1.bam example/data/C2.bam -o example/result/Example -gf example/reference/GRCh38.p12_NC_000022.11.fa -ef example/reference/GRCh38.p12_NC_000022.11.gff 
+-mutf example/reference/SNP_NC_000022.11.vcf -repli
 ```
-Running this instruction will result in getting a file named Example_riboSNitch.txt. `example/Example` means output_dir/file_prefix
+Running this instruction will result in getting a file named Example_riboSNitch.txt. `example/result/Example` means output_dir/file_prefix
 
 More commonly used
 
 ```
-java [-Xmx16g] -jar circm6a.jar -input <input.bam> -g <genome.fa> -o <path/out_prefix> [-ip ip.bam] [-r gencode.gtf] [options]
+java [-Xmx16g] -jar diffRSS.jar -tf <treat.bam(s)> -gf <genome.fa> -ef <gencode.gtf/gff> -mutf <snp.cvf> -o <path/out_prefix> [-cf control.bam(s)] [options]
 ```
 
 ## Usage
@@ -65,55 +65,43 @@ Usage:
 
 ## Example
 
-  ```
-cd ../..
-java -Xmx16g -jar circm6a.jar -ip test_data/HeLa_eluate_rep_1.chr22.bam -input test_data/HeLa_input_rep_1.chr22.bam -r test_data/gencode_chr22.gtf -g test_data/hg38_chr22.fa -o test_data/example_Hela
-  ```
+```
+java -Xmx16g -jar diffRSS.jar -tf example/data/T1.bam example/data/T2.bam -cf example/data/C1.bam example/data/C2.bam -o example/result/Example -gf example/reference/GRCh38.p12_NC_000022.11.fa -ef example/reference/GRCh38.p12_NC_000022.11.gff 
+-mutf example/reference/SNP_NC_000022.11.vcf -repli
+```
 
 ## OutputHeaders
 
-* Here are definitions of headers in output file named `(output_dir/file_prefix)_circRNAs.txt`
+* Here are definitions of headers in output file named `(output_dir/file_prefix)_riboSNitch.txt`
 
 | Field       | Description                           |
 | ---------- | ------------------------------------ |
 | Chr | Chromosome Name|
-| Start | Start of circular RNA |
-| End | End of circular RNA |
-| Gene Name | Gene Symbol of gene covered circular RNA or 'None' for gene does not exist |
-| Score | Total alignments near start or end of circular RNA |
-| Strand | Strand of gene covered circular RNA or '.' for none gene |
-| IP JunctionReads | number of BSJ reads supporting circular RNA in MeRIP sample if given|
-| INPUT JunctionReads | number of BSJ reads supporting circular RNA in non-IP sample |
-| LinearReads | number of reads near start or end of circular RNA but are not supporting in non-IP sample |
-| CircRatio | ratio of BSJ reads over all near reads |
-| IDs | IDs of BSJ reads detecting circular RNA if output in detail |
+| Position | SNP position in the chromosome (1 based) |
+| Ref | reference snp |
+| Alt | variant snp |
+| Name | dbSNP ID |
+| Score | score of riboSNitch (-1.0 is shown not meaningful) |
+| Strand | strand of this gene |
+| Gene | the longest gene covers this snp |
+| Transcript | the longest transcript covers this snp |
+| Annotation | feature of transcript |
+| Region_in_Genome/Transcriptome | judging region in chromosome/transcript |
 
-* Here are definitions of headers in output file named `(output_dir/file_prefix)_circ_peak.bed` and `(output_dir/file_prefix)_linear_peak.bed`
+* Here are definitions of headers in output file named `(output_dir/file_prefix)riboSNitchDetail.txt`
 
 | Field       | Description                           |
 | ---------- | ------------------------------------ |
-| Chr | Chromosome Name|
-| Start | Start of peak |
-| End | End of peak |
-| Name | Gene Symbol of gene covered peak or 'None' for gene does not exist |
-| Score | combined p-value of peak |
-| Strand | Strand of gene covered peak or '.' for none gene |
-| thickStart | The same as start |
-| thickEnd | The same as end |
-| itemRgb | number of BSJ reads detecting circular RNA in MeRIP sample |
-| blockCount | number of blocks included in peak region |
-| blockSizes | size of each block |
-| blockStarts | start of each block |
-| Confidence | Show confidence of a peak in circular peaks |
-| FDR | Show adjusted p-value of each peak |
-| Proportion | Proportion of ratio of BSJ reads against to total reads between MeRIP sample and non-IP sample |
-
-
-## Limitations
-
-<img src="m6A-RIP.png" align="left" />
-
-Circm6A still has limitations when being applied to the MeRIP-seq data that was generated using the strategy of fragmentation before m6A-IP, which is the more frequently used library construction strategy since it could detect higher resolution m6A sites compared to the strategy of fragmentation after m6A-IP. For the strategy of fragmentation before m6A-IP, if the m6As are located in the circRNAs but distal to BSJs, the circRNA fragments pulled down by m6A-IP will not have BSJ signal thus the m6A enrichment signal will not be connected with the circRNAs. Therefore, the m6A-circRNAs with m6As distal to BSJs will not be detected by Circm6As and other circRNA detection tools. The analysis on our simulated data validated this assumption. To address this limitation, we developed a random forest model for the prediction of m6A modification status from the MeRIP-seq data. The random forest model will complement the Circm6A results.
+| Name | dbSNP ID (key with riboSNitch file) |
+| eSDC | eSDC score of riboSNitch |
+| eSDC_pValue | permutation pValue of eSDC score |
+| SNP_Reads_Ratio | proportion of reads that can be divided into specific alleles |
+| Replicate_eSDC | eSDC score of riboSNitch in replicates |
+| Treat_Counts(A|T|C|G) | separate read counts cover snp in treat file(s) |
+| Control_Counts(A|T|C|G) | separate read counts cover snp in control file(s) |
+| Ref_Seq | base sequence of judging region |
+| Ref_Score/Alt_Score | base scores of judging region |
+| StructDiff_pValue | permutation pValues of bases in judging region |
 
 ## License
 Licensed GPLv3 for open source use or contact zuoLab (zuozhx@sysucc.org.cn) for commercial use.

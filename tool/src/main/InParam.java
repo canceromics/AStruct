@@ -575,7 +575,7 @@ public class InParam {
 	}
 	
 	private void help() {
-		InputStream is = InParam.class.getResourceAsStream("/Help_Document");
+		InputStream is = InParam.class.getResourceAsStream("/Help");
 		try {
 			InputStreamReader isr = new InputStreamReader(is, "UTF-8");
 			BufferedReader reader = new BufferedReader(isr);

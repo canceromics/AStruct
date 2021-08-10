@@ -40,21 +40,17 @@ public class Peak extends IntRegion {
 	}
 	
 	public static String getHeader() {
-		return "#Chr\tStart\tEnd\tCirc";
+		return "#Chr\tStart\tEnd\tCirc\tDes\tScript";
 	}
 	
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(super.toString());
-		if (near_circ != null) {
-			sb.append('\t');
-			sb.append(near_circ);
-		}
-		if (description != null) {
-			sb.append('\t');
-			sb.append(description);
-		}
+		sb.append('\t');
+		sb.append(near_circ == null ? "-" : near_circ);
+		sb.append('\t');
+		sb.append(description == null ? "-" : description);
 		if (script != null) {
 			sb.append('\t');
 			sb.append(script.getScript_id());
@@ -62,6 +58,9 @@ public class Peak extends IntRegion {
 				sb.append(',');
 				sb.append(s.getScript_id());
 			}
+		}
+		else {
+			sb.append("\t-");
 		}
 		return sb.toString();
 	}

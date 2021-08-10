@@ -77,10 +77,10 @@ Method:
 		[-alen length] length of sequence needed. (default is 150, must bigger than 0)
 	
 	stat:
-	result status
+	result status in different bed files
 	options:
-		<-tf treat ...> treat bed file
-		<-cf control> control bed file
+		<-tf treat ...> treat bed file with 4th line is value
+		<-cf control> control bed file with all regions need status
 		<-o out_prefix> output file prefix
 	
 	cover:

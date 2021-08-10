@@ -115,7 +115,7 @@ public class CircleClip extends IntRegion {
 	}
 	
 	public static String getHeader() {
-		return "#Chr\tStart\tEnd\tTranscript\tDis_m6A\tBSJ_IP\tBSJ_input\tlinear_IP\tlinear_input";
+		return "#Chr\tStart\tEnd\tTranscript\tDis_m6A\tBSJ_T\tBSJ_C\tlinear_T\tlinear_C";
 	}
 	
 	@Override
