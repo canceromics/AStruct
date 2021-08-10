@@ -1,4 +1,4 @@
-usage:
+Usage:
 
 java [-Xmx16g] -jar RTstop.jar <method> [options]
 
@@ -79,8 +79,8 @@ Method:
 	stat:
 	result status
 	options:
-		<-tf treat ...> treat bam file
-		<-cf control> control bam file
+		<-tf treat ...> treat bed file
+		<-cf control> control bed file
 		<-o out_prefix> output file prefix
 	
 	cover:
@@ -100,3 +100,4 @@ Method:
 		<-mutf snp.vcf> snp vcf/bed file
 		<-o out_prefix> output file prefix
 		[-minbr count] snp line number. (default is 0)
+		[-sam] split in sam format. (default is bam)

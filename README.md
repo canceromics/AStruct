@@ -1,8 +1,8 @@
 <img src="icon.png" align="right" />
 
-# Circm6A
+# diffRSS
 
-Circm6A is a powerful tool for detection  m6A modification of circular RNA(circRNA).
+diffRSS is a powerful tool for detection  different riboSNitch structure in alleles (SNPs).
 
 
 
@@ -30,21 +30,21 @@ cd diffRSS/tool/src
 sh make.sh
 cd ../..
 ```
-The tool is generated as circm6a.jar in this directory.
+The tool is generated as diffRSS.jar in this directory.
 
 ## QuickStart
 
 * Start from bam file of and input sample for example.
 
 ```
-java -Xmx16g -jar diffRSS.jar -tf Treat.bam -cf Control.bam -o ./example -g genome.fa
+java -Xmx16g -jar diffRSS.jar -tf example/treat1.bam example/treat2.bam -cf example/control1.bam example/control2.bam -o example/result -gf example/reference/GRCh38.p12_NC_000022.11.fa -ef example/reference/GRCh38.p12_NC_000022.11.gff -repli
 ```
-Running this instruction will result in getting a file named example_circRNAs.txt. `./example` means output_dir/file_prefix
+Running this instruction will result in getting a file named Example_riboSNitch.txt. `example/Example` means output_dir/file_prefix
 
 More commonly used
 
 ```
-java [-Xmx24g] -jar circm6a.jar -input <input.bam> -g <genome.fa> -o <path/out_prefix> [-ip ip.bam] [-r gencode.gtf] [options]
+java [-Xmx16g] -jar circm6a.jar -input <input.bam> -g <genome.fa> -o <path/out_prefix> [-ip ip.bam] [-r gencode.gtf] [options]
 ```
 
 ## Usage

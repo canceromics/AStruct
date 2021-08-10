@@ -205,10 +205,6 @@ public class InParam {
 	public int getExam() {
 		return exam;
 	}
-	
-	public boolean isSam_format() {
-		return sam_format;
-	}
 
 	public String getOutPrefix() {
 		return out_pre;

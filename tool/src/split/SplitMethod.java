@@ -30,7 +30,7 @@ public class SplitMethod {
 				return;
 			}
 			SplitMethod spm = new SplitMethod();
-			spm.splitBam(InParam.getParams().getTreatFile(), mut_table, InParam.getParams().getOutPrefix(), false);
+			spm.splitBam(InParam.getParams().getTreatFile(), mut_table, InParam.getParams().getOutPrefix(), !InParam.getParams().isSamFormat());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

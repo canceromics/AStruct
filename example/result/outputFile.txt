@@ -1,0 +1,52 @@
+rtmut:
+	*_riboSNitch.txt;
+	header{
+		Chr : reference chromosome name
+		Position : snp position in the chromosome 
+		Ref : reference snp
+		Alt : variant snp
+		Name : dbSNP ID
+		Score : score of riboSNitch (-1.0 is shown not meaningful)
+		Strand : strand of this gene
+		Gene : the longest gene covers this snp
+		Transcript : the longest transcript covers this snp
+		Annotation : feature of transcript
+		Region_in_Genome|Transcriptome : judging region in chromosome | transcript
+	}
+	*_riboSNitchDetail.txt;
+	header{
+		Name : dbSNP ID (key with riboSNitch file)
+		eSDC : eSDC score of riboSNitch
+		eSDC_pValue : permutation pValue of eSDC score
+		SNP_Reads_Ratio : proportion of reads that can be divided into specific alleles
+		Replicate_eSDC : eSDC score of riboSNitch in replicates
+		Treat_Counts(A|T|C|G) : separate read counts cover snp in treat file(s)
+		Control_Counts(A|T|C|G) : separate read counts cover snp in control file(s)
+		Ref_Seq : base sequence of judging region
+		Ref_Score|Alt_Score : base scores of judging region
+		StructDiff_pValue : permutation pValues of bases in judging region
+	}
+sim:
+	*_T_L1.fastq.gz;
+	*_T_L2.fastq.gz;
+	*_C_L1.fastq.gz;
+	*_C_L2.fastq.gz;
+	[*_mut.bed;]
+	header{
+		
+	}
+	[*_peak.bed;]
+	[*_circ.bed;]
+	[*_annote.txt;]
+maf:
+	*_mut.txt;
+seq:
+	*_annoted.bed;
+stat:
+	*_sup.txt;
+cover:
+	*_gene_score.bed;
+	[*_snp.bed;]
+split:
+	*_ref.[bam/sam];
+	*_alt.[bam/sam];

@@ -971,10 +971,10 @@ public class SimMethod {
 	}
 	
 	private void sim() {
-		try (final BufferedWriter writer_input1 = buildWriter(args.getOutPrefix() + "_input_L1.fastq", false, args.isOutZip());
-				final BufferedWriter writer_input2 = buildWriter(args.getOutPrefix() + "_input_L2.fastq", false, args.isOutZip());
-				final BufferedWriter writer_ip1 = buildWriter(args.getOutPrefix() + "_IP_L1.fastq", false, args.isOutZip());
-				final BufferedWriter writer_ip2 = buildWriter(args.getOutPrefix() + "_IP_L2.fastq", false, args.isOutZip());
+		try (final BufferedWriter writer_input1 = buildWriter(args.getOutPrefix() + "_C_L1.fastq", false, args.isOutZip());
+				final BufferedWriter writer_input2 = buildWriter(args.getOutPrefix() + "_C_L2.fastq", false, args.isOutZip());
+				final BufferedWriter writer_ip1 = buildWriter(args.getOutPrefix() + "_T_L1.fastq", false, args.isOutZip());
+				final BufferedWriter writer_ip2 = buildWriter(args.getOutPrefix() + "_T_L2.fastq", false, args.isOutZip());
 				final BufferedWriter writer_annote = args.isAnnote() ? 
 						buildWriter(args.getOutPrefix() + "_annote.txt", false, args.isOutZip()) : null) {
 			
@@ -1064,8 +1064,8 @@ public class SimMethod {
 	}
 	
 	private void simPeak() {
-		try (final BufferedWriter writer_ip1 = buildWriter(args.getOutPrefix() + "_IP_L1.fastq", true, args.isOutZip());
-				final BufferedWriter writer_ip2 = buildWriter(args.getOutPrefix() + "_IP_L2.fastq", true, args.isOutZip());
+		try (final BufferedWriter writer_ip1 = buildWriter(args.getOutPrefix() + "_T_L1.fastq", true, args.isOutZip());
+				final BufferedWriter writer_ip2 = buildWriter(args.getOutPrefix() + "_T_L2.fastq", true, args.isOutZip());
 				final BufferedWriter writer_annote = args.isAnnote() ? 
 						buildWriter(args.getOutPrefix() + "_annote.txt", true, args.isOutZip()) : null){
 			Method.printNow("Peak start");
@@ -1102,10 +1102,10 @@ public class SimMethod {
 	}
 	
 	private void simScaf() throws IOException {
-		try (final BufferedWriter writer_input1 = buildWriter(args.getOutPrefix() + "_input_L1.fastq", false, args.isOutZip());
-				final BufferedWriter writer_input2 = buildWriter(args.getOutPrefix() + "_input_L2.fastq", false, args.isOutZip());
-				final BufferedWriter writer_ip1 = buildWriter(args.getOutPrefix() + "_IP_L1.fastq", false, args.isOutZip());
-				final BufferedWriter writer_ip2 = buildWriter(args.getOutPrefix() + "_IP_L2.fastq", false, args.isOutZip());
+		try (final BufferedWriter writer_input1 = buildWriter(args.getOutPrefix() + "_C_L1.fastq", false, args.isOutZip());
+				final BufferedWriter writer_input2 = buildWriter(args.getOutPrefix() + "_C_L2.fastq", false, args.isOutZip());
+				final BufferedWriter writer_ip1 = buildWriter(args.getOutPrefix() + "_T_L1.fastq", false, args.isOutZip());
+				final BufferedWriter writer_ip2 = buildWriter(args.getOutPrefix() + "_T_L2.fastq", false, args.isOutZip());
 				final BufferedWriter writer_annote = args.isAnnote() ? 
 						buildWriter(args.getOutPrefix() + "_annote.txt", false, args.isOutZip()) : null) {
 			
