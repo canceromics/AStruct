@@ -52,7 +52,7 @@ java [-Xmx16g] -jar diffRSS.jar -tf <treat.bam(s)> -gf <genome.fa> -ef <gencode.
 * More details of this tool can be found with -h parameter
 
 ```
-java [-Xmx16g] -jar RTstop.jar <method> [options]
+java [-Xmx16g] -jar difRSS.jar <method> [options]
 ```
 
 * Tips: -r enables exon boundary filter of circRNA detecting. -ip enables circle m6A peak detecting.
