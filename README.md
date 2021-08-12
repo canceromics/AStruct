@@ -52,13 +52,7 @@ java [-Xmx16g] -jar diffRSS.jar -tf <treat.bam(s)> -gf <genome.fa> -ef <gencode.
 * More details of this tool can be found with -h parameter
 
 ```
-java -Xmx16g -jar circm6A.jar -h
-Usage:
-	java [-Xmx24g] -jar circm6a.jar -input <input.bam> -g <genome.fa> -o <path/out_prefix> [-ip ip.bam] [-r gencode.gtf] [options]
-	
-	<input.bam>	a bam/sam file of a sample mapping by bwa.
-	<genome.fa>	a fasta file of the genome. The same as the file used by bwa is recommended.
-	<path/out_prefix>	the path should exist and out_prefix is the first part of the output file name.
+java [-Xmx16g] -jar RTstop.jar <method> [options]
 ```
 
 * Tips: -r enables exon boundary filter of circRNA detecting. -ip enables circle m6A peak detecting.

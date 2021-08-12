@@ -2101,7 +2101,9 @@ public class RiboSNP {
 		sbd.append(String.format("%.4f", esdcShareScore));
 		int times = args.getPermutate();
 		double esdcSharePer = 0.0;
-		double[] diffShareScores = CommonMethod.subNoNegAbsArray(scoresShare1, scoresShare2);
+//		double[] diffShareScores = CommonMethod.subNoNegAbsArray(scoresShare1, scoresShare2);
+		double[] diffShareScores = filtScoreFill(CommonMethod.smoothNoNegArray(scoreFilter(
+				CommonMethod.subNoNegAbsArray(scoresShare1, scoresShare2), subSeq), 2), subSeq);
 		double[] diffSharePer = new double[diffShareScores.length];
 		double[] diffShareTotal = new double[diffShareScores.length];
 		int esdcTime = 0;
@@ -2113,7 +2115,8 @@ public class RiboSNP {
 				esdcSharePer += testScore >= esdcShareScore ? 1.0 : 0.0;
 				++esdcTime;
 			}
-			double[] diffScoresPer = CommonMethod.subNoNegAbsArray(testScores[0], testScores[1]);
+			double[] diffScoresPer = filtScoreFill(CommonMethod.smoothNoNegArray(scoreFilter(
+					CommonMethod.subNoNegAbsArray(testScores[0], testScores[1]), subSeq), 2), subSeq);
 	 		for (int j = 0; j < diffScoresPer.length; ++j) {
 	 			diffShareTotal[j] += diffScoresPer[j] >= 0.0 ? 1.0 : 0.0;
 	 			diffSharePer[j] += diffScoresPer[j] >= diffShareScores[j] ? 1.0 : 0.0;

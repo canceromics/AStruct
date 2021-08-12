@@ -456,33 +456,33 @@ public class CommonMethod {
 //		return smooth;
 //	}
 	
-//	public static double[] smoothNoNegArray(double[] array, int rad) {
-//		double[] smooth = new double[array.length];
-//		double sum = 0.0;
-//		int len = 2 * rad + 1;
-//		if (array.length < len) {
-//			return array;
-//		}
-//		for (int i = 0; i < len; ++i) {
-//			sum += Math.max(0.0, array[i]);
-//			smooth[(i + 1) / 2] = sum / (i + 1);
-//		}
-//		for (int i = len; i < array.length; ++i) {
-//			sum += Math.max(0.0, array[i]);
-//			sum -= Math.max(0.0, array[i - len]);
-//			smooth[i - rad] = sum / len;
-//		}
-//		for (int i = array.length - rad; i < array.length; ++i) {
-//			int sub = array.length - i;
-//			sum -= Math.max(0.0, array[i - sub - 1]);
-//			sum -= Math.max(0.0, array[i - sub]);
-//			smooth[i] = sum / (2 * sub - 1);
-//		}
-//		for (int i = 0; i < array.length; ++i) {
-//			smooth[i] = array[i] < 0.0 ? -1.0 : smooth[i];
-//		}
-//		return smooth;
-//	}
+	public static double[] smoothNoNegArray(double[] array, int rad) {
+		double[] smooth = new double[array.length];
+		double sum = 0.0;
+		int len = 2 * rad + 1;
+		if (array.length < len) {
+			return array;
+		}
+		for (int i = 0; i < len; ++i) {
+			sum += Math.max(0.0, array[i]);
+			smooth[(i + 1) / 2] = sum / (i + 1);
+		}
+		for (int i = len; i < array.length; ++i) {
+			sum += Math.max(0.0, array[i]);
+			sum -= Math.max(0.0, array[i - len]);
+			smooth[i - rad] = sum / len;
+		}
+		for (int i = array.length - rad; i < array.length; ++i) {
+			int sub = array.length - i;
+			sum -= Math.max(0.0, array[i - sub - 1]);
+			sum -= Math.max(0.0, array[i - sub]);
+			smooth[i] = sum / (2 * sub - 1);
+		}
+		for (int i = 0; i < array.length; ++i) {
+			smooth[i] = array[i] < 0.0 ? -1.0 : smooth[i];
+		}
+		return smooth;
+	}
 	
 //	public static double[] smoothNoNegRegion(double[] array, int rad) {
 //		double[] smooth = array.clone();

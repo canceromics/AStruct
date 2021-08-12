@@ -4,7 +4,7 @@ java [-Xmx16g] -jar RTstop.jar <method> [options]
 
 Method:
 	rtmut
-	find different structure around SNPs.
+	find different structure around SNPs. (all bams need to be sorted by coordinate)
 	options:
 		<-tf treat.bam ...> treat bam files
 		<-cf control.bam ...> control bam files
@@ -18,7 +18,7 @@ Method:
 		[-mut] switch between RTstop/RTmut
 		
 	rtmut
-	find different structure between 2 samples.
+	find different structure between 2 samples. (all bams need to be sorted by coordinate)
 	options:
 		<-tf treat.bam ...> treat bam files
 		<-cf control.bam ...> control bam files
