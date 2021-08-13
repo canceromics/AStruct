@@ -27,7 +27,8 @@ Method:
 		<-ef gencode.gtf> annotation gtf/gff file
 		<-gf genome.fa> genome fasta file
 		<-o out_prefix> output file prefix
-		[-mutf snp.vcf] snp vcf/bed file (use gene region without this)
+		[-mutf snp.vcf] snp vcf/bed file (use gene region without this, overwrites -peakf parameter)
+		[-peakf region.bed] region bed file
 		[-permu count] set permutation with count times. (default is 1000)
 		[-repli] enable replication filter
 		[-seed seed] set random seed
