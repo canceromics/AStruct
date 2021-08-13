@@ -540,13 +540,14 @@ public class InParam {
 	
 	private boolean checkParams() {
 		try {
-			if (method < 0) {
-				helpMethod();
-			}
 			if (help) {
 				help();
 				return false;
 			}
+			if (method < 0) {
+				helpMethod();
+			}
+
 //			if (genome_file == null || exon_file == null) {
 //				throw new FileNotFoundException("Lack parameter(s)");
 //			}
@@ -571,7 +572,7 @@ public class InParam {
 	}
 
 	private void helpMethod() {
-		System.out.println("Choose from a method: sim, maf, seq, stat, cover");
+		System.out.println("To Use:\njava [-Xmx16g] -jar RTstop.jar <method> [options]\nChoose from a method: sim, rtmut");
 	}
 	
 	private void help() {

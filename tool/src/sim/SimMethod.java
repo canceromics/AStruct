@@ -1667,7 +1667,8 @@ public class SimMethod {
 		}
 		StringBuilder sb = new StringBuilder();
 		for (int i = bases.length() - 1; i >= 0; i--) {
-			sb.append(BASE_MAP.containsKey(bases.charAt(i)) ? BASE_MAP.get(bases.charAt(i)) : bases.charAt(i));
+			char c = BASE_MAP.containsKey(bases.charAt(i)) ? BASE_MAP.get(bases.charAt(i)) : bases.charAt(i);
+			sb.append(c);
 		}
 		return sb.toString();
 	}
