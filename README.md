@@ -55,8 +55,6 @@ java [-Xmx16g] -jar diffRSS.jar -tf <treat.bam(s)> -gf <genome.fa> -ef <gencode.
 java [-Xmx16g] -jar diffRSS.jar <method> [options]
 ```
 
-* Tips: -r enables exon boundary filter of circRNA detecting. -ip enables circle m6A peak detecting.
-
 ## Example
 
 ```
@@ -91,8 +89,8 @@ java -Xmx16g -jar diffRSS.jar -tf example/data/T1.bam example/data/T2.bam -cf ex
 | eSDC_pValue | permutation pValue of eSDC score |
 | SNP_Reads_Ratio | proportion of reads that can be divided into specific alleles |
 | Replicate_eSDC | eSDC score of riboSNitch in replicates |
-| Treat_Counts(A|T|C|G) | separate read counts cover snp in treat file(s) |
-| Control_Counts(A|T|C|G) | separate read counts cover snp in control file(s) |
+| Treat_Counts(A\|T\|C\|G) | separate read counts cover snp in treat file(s) |
+| Control_Counts(A\|T\|C\|G) | separate read counts cover snp in control file(s) |
 | Ref_Seq | base sequence of judging region |
 | Ref_Score/Alt_Score | base scores of judging region |
 | StructDiff_pValue | permutation pValues of bases in judging region |
