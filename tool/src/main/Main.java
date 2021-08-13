@@ -19,7 +19,7 @@ public class Main {
 		if (InParam.getParams().setParams(args)) {
 			switch (InParam.getParams().getMethod()) {
 			case 0:
-				SimMethod.runScaf();
+				SimMethod.run();
 				break;
 				
 			case 1:

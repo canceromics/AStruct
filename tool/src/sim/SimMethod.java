@@ -109,55 +109,55 @@ public class SimMethod {
 		}
 	}
 	
-	public static void runScaf() {
-		m.args = InParam.getParams();
-		try {
-			m.genome = Method.loadGenomeInfo(m.args.getExonFile(), m.args.getGenomeFile());
-			Method.printNow("Genome complete!");
-			m.muts = Method.readMutation(m.args.getMutFile(), m.muts);
-			
-			List<String> chrRemove = new ArrayList<>();
-//			String geneName = "gene-MTMR12";
-			m.genome.getChrMap().forEach((chrString, chr) -> {
-				if (!m.muts.containsKey(chrString)) {
-					chrRemove.add(chrString);
-					return;
-				}
-				for (Node<Gene> geneNode : chr.getGeneTree()) {
-//					if (!geneName.equals(geneNode.getValue().getGene_id())) {
-					if (!m.muts.get(chrString).overlappers(geneNode.getStart(), geneNode.getEnd()).hasNext()) {
-						chr.getGeneTree().remove(geneNode.getStart(), geneNode.getEnd());
-					}
-				}
-			});
-			for (String chr : chrRemove) {
-				m.genome.getChrMap().remove(chr);
-			}
-			
-
-			m.scaf_table = m.getAlleleScaffold(Method.readScaffolds(m.args.getScafFile(), null));
-			m.ensureRelation(null);
-			Method.printNow("SNV complete!");
-			m.writeMutExonSeq();
-			m.FixMapQ = buildQualiString(m.args.getAlignmentLength() + 16, "J");
-			
-			m.prepareSim();
-			m.simScaf();
-			
-			if (m.args.getMutFile() != null) {
-				Method.getInstance().calMAF(m.muts, m.genome);
-				Method.writeFile(m.args.getOutPrefix() + "_mut.bed", m.muts, true, false, Mutation.getHeader());
-			}
-			if (m.args.getCircFile() != null) {
-				Method.writeFile(m.args.getOutPrefix() + "_circ.bed", m.circ_table, true, false, CircleClip.getHeader());
-			}
-			if (m.args.getPeakFile() != null) {
-				Method.writeFile(m.args.getOutPrefix() + "_peak.bed", m.peak_table, true, false, Peak.getHeader());
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+//	public static void runScaf() {
+//		m.args = InParam.getParams();
+//		try {
+//			m.genome = Method.loadGenomeInfo(m.args.getExonFile(), m.args.getGenomeFile());
+//			Method.printNow("Genome complete!");
+//			m.muts = Method.readMutation(m.args.getMutFile(), m.muts);
+//			
+//			List<String> chrRemove = new ArrayList<>();
+////			String geneName = "gene-MTMR12";
+//			m.genome.getChrMap().forEach((chrString, chr) -> {
+//				if (!m.muts.containsKey(chrString)) {
+//					chrRemove.add(chrString);
+//					return;
+//				}
+//				for (Node<Gene> geneNode : chr.getGeneTree()) {
+////					if (!geneName.equals(geneNode.getValue().getGene_id())) {
+//					if (!m.muts.get(chrString).overlappers(geneNode.getStart(), geneNode.getEnd()).hasNext()) {
+//						chr.getGeneTree().remove(geneNode.getStart(), geneNode.getEnd());
+//					}
+//				}
+//			});
+//			for (String chr : chrRemove) {
+//				m.genome.getChrMap().remove(chr);
+//			}
+//			
+//
+//			m.scaf_table = m.getAlleleScaffold(Method.readScaffolds(m.args.getScafFile(), null));
+//			m.ensureRelation(null);
+//			Method.printNow("SNV complete!");
+//			m.writeMutExonSeq();
+//			m.FixMapQ = buildQualiString(m.args.getAlignmentLength() + 16, "J");
+//			
+//			m.prepareSim();
+//			m.simScaf();
+//			
+//			if (m.args.getMutFile() != null) {
+//				Method.getInstance().calMAF(m.muts, m.genome);
+//				Method.writeFile(m.args.getOutPrefix() + "_mut.bed", m.muts, true, false, Mutation.getHeader());
+//			}
+//			if (m.args.getCircFile() != null) {
+//				Method.writeFile(m.args.getOutPrefix() + "_circ.bed", m.circ_table, true, false, CircleClip.getHeader());
+//			}
+//			if (m.args.getPeakFile() != null) {
+//				Method.writeFile(m.args.getOutPrefix() + "_peak.bed", m.peak_table, true, false, Peak.getHeader());
+//			}
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	private void loadInfo() throws IOException {
 		boolean peak_flag = args.getPeakFile() != null && Files.exists(Paths.get(args.getPeakFile()));
