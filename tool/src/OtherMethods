@@ -1,0 +1,44 @@
+Methods:	
+	maf:
+	calculate major allele frequency
+	options:
+		<-tf treat.bam> treat bam file
+		<-cf control.bam> control bam file
+		<-ef gencode.gtf> annotation gtf/gff file
+		<-gf genome.fa> genome fasta file
+		<-mutf snp.vcf> snp vcf/bed file
+		<-o out_prefix> output file prefix
+	
+	seq:
+	find base sequence around bed region in transcript (with only exons)
+	options:
+		<-peakf bed> bed file that need to find upstream and downstream.
+		<-ef gencode.gtf> annotation gtf/gff file
+		<-gf genome.fa> genome fasta file
+		[-alen length] length of sequence needed. (default is 150, must bigger than 0)
+	
+	stat:
+	result status in different bed files
+	options:
+		<-tf treat ...> treat bed file with 4th line is value
+		<-cf control> control bed file with all regions need status
+		<-o out_prefix> output file prefix
+	
+	cover:
+	calculate relations between m6Apeaks and SNPs.
+	options:
+		<-tf treat.bam> treat bam file
+		<-cf control.bam> control bam file
+		<-ef gencode.gtf> annotation gtf/gff file
+		<-peakf m6Apeak.bed> bed3 file that include m6Apeak regions.
+		<-mutf snp.vcf> snp vcf/bed file
+		<-o out_prefix> output file prefix
+	
+	split:
+	split a bam into alt and ref use one snp site.
+	options:
+		<-tf treat.bam> treat bam file
+		<-mutf snp.vcf> snp vcf/bed file
+		<-o out_prefix> output file prefix
+		[-minbr count] snp line number. (default is 0)
+		[-sam] split in sam format. (default is bam)
