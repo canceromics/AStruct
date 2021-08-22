@@ -3,7 +3,7 @@ Usage:
 java [-Xmx16g] -jar RTstop.jar <method> [options]
 
 Method:
-	rtmut
+	ribosnitch
 	find different structure around SNPs. (all bams need to be sorted by coordinate)
 	options:
 		<-tf treat.bam ...> treat bam files
@@ -17,7 +17,7 @@ Method:
 		[-seed seed] set random seed
 		[-mut] switch between RTstop/RTmut
 		
-	rtmut
+	twosample
 	find different structure between 2 samples. (all bams need to be sorted by coordinate)
 	options:
 		<-tf treat.bam ...> treat bam files

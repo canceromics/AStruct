@@ -269,9 +269,10 @@ public class InParam {
 		methods.add("seq");
 		methods.add("stat");
 		methods.add("cover");
-		methods.add("rtmut");
+		methods.add("ribosnitch");
 		methods.add("split");
 		methods.add("junc");
+		methods.add("twosample");
 		return methods.indexOf(m_string);
 	}
 	
@@ -572,7 +573,7 @@ public class InParam {
 	}
 
 	private void helpMethod() {
-		System.out.println("To Use:\njava [-Xmx16g] -jar RTstop.jar <method> [options]\nChoose from a method: sim, rtmut");
+		System.out.println("To Use:\njava [-Xmx16g] -jar RTstop.jar <method> [options]\nChoose from a method: sim, ribosnitch, twosample");
 	}
 	
 	private void help() {

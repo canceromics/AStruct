@@ -11,7 +11,6 @@ diffRSS is a powerful tool for detection  different riboSNitch structure in alle
 * [Installation](#Installation)
 * [Quick Start Guide](#QuickStart)
 * [Usage](#Usage)
-* [Example](#Example)
 * [Output Headers](#OutputHeaders)
 * [License](#License)
 
@@ -36,7 +35,7 @@ The tool is generated as diffRSS.jar in this directory.
 * Start from bam file of and input sample for example.
 
 ```
-java -Xmx16g -jar diffRSS.jar -tf example/data/T1.bam example/data/T2.bam -cf example/data/C1.bam example/data/C2.bam -o example/result/Example -gf example/reference/GRCh38.p12_NC_000022.11.fa -ef example/reference/GRCh38.p12_NC_000022.11.gff 
+java -Xmx16g -jar diffRSS.jar ribosnitch -tf example/data/T1.bam example/data/T2.bam -cf example/data/C1.bam example/data/C2.bam -o example/result/Example -gf example/reference/GRCh38.p12_NC_000022.11.fa -ef example/reference/GRCh38.p12_NC_000022.11.gff 
 -mutf example/reference/SNP_NC_000022.11.vcf -repli
 ```
 Running this instruction will result in getting a file named Example_riboSNitch.txt. `example/result/Example` means output_dir/file_prefix
@@ -54,7 +53,7 @@ java [-Xmx16g] -jar diffRSS.jar -tf <treat.bam(s)> -gf <genome.fa> -ef <gencode.
 ```
 java [-Xmx16g] -jar diffRSS.jar <method> [options]
 Methods:
-    rtmut
+    ribosnitch
     find different structure around SNPs. (all bams need to be sorted by coordinate)
     options:
         <-tf treat.bam ...> treat bam files
@@ -68,7 +67,7 @@ Methods:
         [-seed seed] set random seed
         [-mut] switch between RTstop/RTmut
         
-    rtmut
+    twosample
     find different structure between 2 samples. (all bams need to be sorted by coordinate)
     options:
         <-tf treat.bam ...> treat bam files
@@ -109,13 +108,6 @@ Methods:
         [-enrich proportion] set m6Apeaks enrichment proportion. (default is calculated to ensure the same size between IP and input files.
         [-bases bases] allow structures show in some bases such as "AC". (default is all bases)
         [-mut] change structure simulation from RTstop to RTmutation.
-```
-
-## Example
-
-```
-java -Xmx16g -jar diffRSS.jar -tf example/data/T1.bam example/data/T2.bam -cf example/data/C1.bam example/data/C2.bam -o example/result/Example -gf example/reference/GRCh38.p12_NC_000022.11.fa -ef example/reference/GRCh38.p12_NC_000022.11.gff 
--mutf example/reference/SNP_NC_000022.11.vcf -repli
 ```
 
 ## OutputHeaders

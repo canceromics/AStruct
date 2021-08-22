@@ -64,20 +64,35 @@ public class RiboSNP {
 			cm.args = InParam.getParams();
 			Genome genome = Method.loadGenomeInfo(cm.args.getExonFile(), cm.args.getGenomeFile());
 //			Genome genome = new Genome();
-			if (!cm.args.getTreatFiles2().isEmpty()) {
-				if (cm.args.getMutFile() != null) {
-					cm.getSampleSnpinSortBam(genome);
-				}
-				else {
-					cm.getSamplesinSortBam(genome);
-				}
-				return;
-			}
 //			Method.readMutation(cm.args.getMutFile(), cm.mutTable);
 //			for (String chr : cm.mutTable.keySet()) {
 //				Method.setStrictScript(cm.mutTable.get(chr), genome.getChr(chr));
 //			}
 			cm.getSNPinSortBam(cm.args.getTreatFiles(), cm.args.getControlFiles(), genome);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void runSample() {
+		try {
+			cm.args = InParam.getParams();
+			Genome genome = Method.loadGenomeInfo(cm.args.getExonFile(), cm.args.getGenomeFile());
+//			Genome genome = new Genome();
+			if (cm.args.getTreatFiles2().isEmpty()) {
+				System.err.println("lack param -tf2");
+				return;
+			}
+			if (cm.args.getMutFile() != null) {
+				cm.getSampleSnpinSortBam(genome);
+			}
+			else {
+				cm.getSamplesinSortBam(genome);
+			}
+//			Method.readMutation(cm.args.getMutFile(), cm.mutTable);
+//			for (String chr : cm.mutTable.keySet()) {
+//				Method.setStrictScript(cm.mutTable.get(chr), genome.getChr(chr));
+//			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

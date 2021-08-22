@@ -50,6 +50,10 @@ public class Main {
 				Chimeric.run();
 				break;
 				
+			case 8:
+				RiboSNP.runSample();
+				break;
+				
 			default:
 				System.out.println("Error: Wrong Method!");
 				break;
