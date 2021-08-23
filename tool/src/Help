@@ -1,6 +1,6 @@
 Usage:
 
-java [-Xmx16g] -jar RTstop.jar <method> [options]
+java [-Xmx16g] -jar AStruct.jar <method> [options]
 
 Method:
 	ribosnitch

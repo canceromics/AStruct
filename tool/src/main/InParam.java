@@ -277,7 +277,10 @@ public class InParam {
 	}
 	
 	private boolean set(String[] args) {
-		if (args.length >= 1) {
+		if (args.length <= 1) {
+			help = true;
+		}
+		if (args.length > 1) {
 			method = setMethod(args[0].toLowerCase());
 		}
 		for (int i = 1; i < args.length; i++) {

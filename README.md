@@ -1,8 +1,8 @@
 <img src="icon.png" align="right" />
 
-# diffRSS
+# AStruct
 
-diffRSS is a powerful tool for detection  different riboSNitch structure in alleles (SNPs).
+AStruct is a powerful tool for detection  different riboSNitch structure in alleles (SNPs).
 
 
 
@@ -23,19 +23,19 @@ diffRSS is a powerful tool for detection  different riboSNitch structure in alle
 * This tool can be installed by instructions as follows:
 
 ```
-git clone https://github.com/canceromics/diffRSS.git
-cd diffRSS/tool/src
+git clone https://github.com/canceromics/AStruct.git
+cd AStruct/tool/src
 sh make.sh
 cd ../..
 ```
-The tool is generated as diffRSS.jar in this directory.
+The tool is generated as AStruct.jar in this directory.
 
 ## QuickStart
 
 * Start from bam file of and input sample for example.
 
 ```
-java -Xmx16g -jar diffRSS.jar ribosnitch -tf example/data/T1.bam example/data/T2.bam -cf example/data/C1.bam example/data/C2.bam -o example/result/Example -gf example/reference/GRCh38.p12_NC_000022.11.fa -ef example/reference/GRCh38.p12_NC_000022.11.gff 
+java -Xmx16g -jar AStruct.jar ribosnitch -tf example/data/T1.bam example/data/T2.bam -cf example/data/C1.bam example/data/C2.bam -o example/result/Example -gf example/reference/GRCh38.p12_NC_000022.11.fa -ef example/reference/GRCh38.p12_NC_000022.11.gff 
 -mutf example/reference/SNP_NC_000022.11.vcf -repli
 ```
 Running this instruction will result in getting a file named Example_riboSNitch.txt. `example/result/Example` means output_dir/file_prefix
@@ -43,7 +43,7 @@ Running this instruction will result in getting a file named Example_riboSNitch.
 More commonly used
 
 ```
-java [-Xmx16g] -jar diffRSS.jar -tf <treat.bam(s)> -gf <genome.fa> -ef <gencode.gtf/gff> -mutf <snp.cvf> -o <path/out_prefix> [-cf control.bam(s)] [options]
+java [-Xmx16g] -jar AStruct.jar <method> -tf <treat.bam(s)> -gf <genome.fa> -ef <gencode.gtf/gff> -mutf <snp.cvf> -o <path/out_prefix> [-cf control.bam(s)] [options]
 ```
 
 ## Usage
@@ -51,7 +51,7 @@ java [-Xmx16g] -jar diffRSS.jar -tf <treat.bam(s)> -gf <genome.fa> -ef <gencode.
 * More details of this tool can be found with -h parameter
 
 ```
-java [-Xmx16g] -jar diffRSS.jar <method> [options]
+java [-Xmx16g] -jar AStruct.jar <method> [options]
 Methods:
     ribosnitch
     find different structure around SNPs. (all bams need to be sorted by coordinate)
@@ -128,7 +128,7 @@ Methods:
 | Annotation | feature of transcript |
 | Region_in_Genome/Transcriptome | judging region in chromosome/transcript |
 
-* Here are definitions of headers in output file named `(output_dir/file_prefix)riboSNitchDetail.txt`
+* Here are definitions of headers in output file named `(output_dir/file_prefix)_riboSNitchDetail.txt`
 
 | Field       | Description                           |
 | ---------- | ------------------------------------ |
