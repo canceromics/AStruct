@@ -2,9 +2,11 @@
 
 # AStruct
 
-AStruct is a powerful tool for detection  different riboSNitch structure in alleles (SNPs).
+AStruct is a powerful tool for detecting allele-specific RNA secondary structures (RiboSNitches) within one sample from structomics sequencing data.
 
+## Introduction
 
+Here, we present AStruct, a Java-based software for identifying the local structure difference of SNPs from RT-Stop and RT-Mut structure sequencing data. It will automatically target the comparison window according to the maximum spanning Ref and Alt reads length around SNPs from the inputted sorted BAM file(s). SNPs that do not have enough reads support will be filtered out. Replicate samples are highly recommended by removing many false positive results. The output will provide you a AStruct score, evaluating the overall allele’s structure difference. The Astruct score and other basic SNP annotation are written in the first file suffix with riboSnotch.txt. More detailed information, including the intermediate values for calculating AStruct score, the sequence, the region position, base counts, Ref/Alt each base structure score, and the significant P Value of each base structure difference, are also listed in a second file suffix with riboSnotchDetail.txt.
 
 ## Table of Contents
 * [Requirements](#Requirements)
@@ -66,23 +68,6 @@ Methods:
         [-repli] enable replication filter
         [-seed seed] set random seed
         [-mut] switch between RTstop/RTmut
-        
-    twosample
-    find different structure between 2 samples. (all bams need to be sorted by coordinate)
-    options:
-        <-tf treat.bam ...> treat bam files
-        <-cf control.bam ...> control bam files
-        <-tf2 treat.bam ...> homo treat bam files
-        <-cf2 control.bam ...> homo control bam files
-        <-ef gencode.gtf> annotation gtf/gff file
-        <-gf genome.fa> genome fasta file
-        <-o out_prefix> output file prefix
-        [-mutf snp.vcf] snp vcf/bed file (use gene region without this, overwrites -peakf parameter)
-        [-peakf region.bed] region bed file
-        [-permu count] set permutation with count times. (default is 1000)
-        [-repli] enable replication filter
-        [-seed seed] set random seed
-        [-mut] switch between RTstop/RTmut
     
     sim:
     simulate fastq seq data with circRNAs, m6A peaks, structures and SNPs.
@@ -91,21 +76,13 @@ Methods:
         <-gf genome.fa> genome fasta file
         <-o out_prefix> output file prefix
         [-mutf snp.vcf] snp vcf/bed file
-        [-peakf m6Apeak.bed] bed3 file that include m6Apeak regions.
-        [-circf circRNA.bed] bed3 file that include circRNA regions.
         [-sf struct.bed] bed file with structure in 4th column.
         [-alen length] alignment length. (default is 150, must bigger than 0)
         [-rlen length] read fragment length. (default is 300, must bigger than alignment length) (Tips: single end simulation enabled when alignment length is the same as read fragment length)
         [-minalen length] minimum alignment length which sequence lower than this length would be dropped. (default is 30)
         [-faf frequency] enable and set fixed allele frequency. (default is disabled)
         [-peak] enable simulation with m6Apeaks.
-        [-genef gene.bed] only the genes in this file can be used in simulation, and IP enrichment, IP read count, input read count can also be set in this file.
-        [-lnp proportion] set linear reads proportion against circle reads. (default is 50)
-        [-share] enable more than 1 circle m6Apeak in the same gene.
-        [-nolinear] disable m6Apeak simulation when m6Apeaks do not overlap with circRNAs.
-        [-npback proportion] set background proportion in non peak regions in IP against to input. (default is 0.01)
-        [-minbr count] minimum background reads count in IP. (default is 0)
-        [-enrich proportion] set m6Apeaks enrichment proportion. (default is calculated to ensure the same size between IP and input files.
+        [-genef gene.bed] only the genes in this file can be used in simulation.
         [-bases bases] allow structures show in some bases such as "AC". (default is all bases)
         [-mut] change structure simulation from RTstop to RTmutation.
 ```
