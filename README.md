@@ -6,7 +6,7 @@ AStruct is a powerful tool for detecting allele-specific RNA secondary structure
 
 ## Introduction
 
-Here, we present AStruct, a Java-based software for identifying the local structure difference of SNPs from RT-Stop and RT-Mut structure sequencing data. It will automatically target the comparison window according to the maximum spanning Ref and Alt reads length around SNPs from the inputted sorted BAM file(s). SNPs that do not have enough reads support will be filtered out. Replicate samples are highly recommended by removing many false positive results. The output will provide you a AStruct score, evaluating the overall allele’s structure difference. The Astruct score and other basic SNP annotation are written in the first file suffix with riboSnotch.txt. More detailed information, including the intermediate values for calculating AStruct score, the sequence, the region position, base counts, Ref/Alt each base structure score, and the significant P Value of each base structure difference, are also listed in a second file suffix with riboSnotchDetail.txt.
+Here, we present AStruct, a Java-based software for identifying the local structure difference of SNPs from RT-Stop and RT-Mut structure sequencing data. It will automatically target the comparison window according to the maximum spanning Ref and Alt reads length around SNPs from the inputted sorted BAM file(s). SNPs that do not have enough reads support will be filtered out. Replicate samples are highly recommended by removing many false-positive results, meaning the alleles difference must be larger then replicates difference. The output will provide you a AStruct score, evaluating the overall allele’s structure difference. The Astruct score and other basic SNP annotation are written in the first file suffix with riboSnotch.txt. More detailed information, including the intermediate values for calculating AStruct score, the sequence, the region position, base counts, Ref/Alt each base structure score, and the significant P Value of each base structure difference, are also listed in a second file suffix with riboSnotchDetail.txt.
 
 ## Table of Contents
 * [Requirements](#Requirements)
@@ -70,7 +70,7 @@ Methods:
         [-mut] switch between RTstop/RTmut
     
     sim:
-    simulate fastq seq data with circRNAs, m6A peaks, structures and SNPs.
+    simulate fastq seq data structures and SNPs.
     options:
         <-ef gencode.gtf> annotation gtf/gff file
         <-gf genome.fa> genome fasta file
