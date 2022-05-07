@@ -81,7 +81,6 @@ Methods:
         [-rlen length] read fragment length. (default is 300, must bigger than alignment length) (Tips: single end simulation enabled when alignment length is the same as read fragment length)
         [-minalen length] minimum alignment length which sequence lower than this length would be dropped. (default is 30)
         [-faf frequency] enable and set fixed allele frequency. (default is disabled)
-        [-peak] enable simulation with m6Apeaks.
         [-genef gene.bed] only the genes in this file can be used in simulation.
         [-bases bases] allow structures show in some bases such as "AC". (default is all bases)
         [-mut] change structure simulation from RTstop to RTmutation.
