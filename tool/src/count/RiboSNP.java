@@ -10,13 +10,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.math3.stat.inference.KolmogorovSmirnovTest;
-
 import bed.Mutation;
 import bed.Peak;
 import genome.Gene;
 import genome.Genome;
-import genome.IntRegion;
 import genome.Transcript;
 import htsjdk.samtools.SAMRecord;
 import htsjdk.samtools.SamReader;

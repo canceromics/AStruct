@@ -35,7 +35,7 @@ public class Chimeric {
 	public static void run() {
 		chim.args = InParam.getParams();
 		try {
-			Genome genome = Method.getInstance().loadGenomeInfo(chim.args.getExonFile(), chim.args.getGenomeFile());
+			Genome genome = Method.loadGenomeInfo(chim.args.getExonFile(), chim.args.getGenomeFile());
 			Map<String, Map<Integer, Double>> baseCount = new HashMap<>();
 			Map<String, IntervalTree<MappingStat>> mapTable = new HashMap<>();
 			Map<String, IntervalTree<IntervalTree<String>>> junctions = chim.getJunctionInBam(chim.args.getTreatFile(), genome, baseCount, mapTable);
