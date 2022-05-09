@@ -1,6 +1,5 @@
 package main;
 
-import count.Chimeric;
 import count.RiboSNP;
 import exonseq.SeqMethod;
 import sim.SimMethod;
@@ -47,10 +46,6 @@ public class Main {
 				break;
 				
 			case 7:
-				Chimeric.run();
-				break;
-				
-			case 8:
 				RiboSNP.runSample();
 				break;
 				

@@ -271,7 +271,6 @@ public class InParam {
 		methods.add("cover");
 		methods.add("ribosnitch");
 		methods.add("split");
-		methods.add("junc");
 		methods.add("twosample");
 		return methods.indexOf(m_string);
 	}
