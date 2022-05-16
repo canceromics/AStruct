@@ -10,7 +10,7 @@ Here, we present AStruct, a Java-based software for identifying the local struct
 
 ## Table of Contents
 * [Requirements](#Requirements)
-* [Installation](#Installation)
+* [Download](#Download)
 * [Quick Start Guide](#QuickStart)
 * [Usage](#Usage)
 * [Output Headers](#OutputHeaders)
@@ -20,17 +20,14 @@ Here, we present AStruct, a Java-based software for identifying the local struct
 
 * JDK 8
 
-## Installation
+## Download
 
-* This tool can be installed by instructions as follows:
+* This tool can be download by instruction as follow:
 
 ```
-git clone https://github.com/canceromics/AStruct.git
-cd AStruct/tool/src
-sh make.sh
-cd ../..
+wget https://github.com/canceromics/AStruct/releases/download/V1.1/AStruct.jar
 ```
-The tool is generated as AStruct.jar in this directory.
+The tool is named as AStruct.jar in this directory.
 
 ## QuickStart
 
