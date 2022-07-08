@@ -64,6 +64,7 @@ Methods:
         [-permu count] set permutation with count times. (default is 1000)
         [-repli] enable replication filter
         [-seed seed] set random seed
+        [-bases bases] allow structures show in some bases such as "AC". (default is all bases)
         [-mut] switch between RTstop/RTmut
     
     sim:
